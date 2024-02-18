@@ -1,4 +1,4 @@
-FROM node:20-slim
+FROM node:hydrogen-buster
 
 RUN groupadd --gid 3434 ciuser \
   && useradd --uid 3434 --gid ciuser --shell /bin/bash --create-home ciuser \
