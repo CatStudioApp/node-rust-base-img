@@ -30,7 +30,7 @@ RUN mkdir -p "${HOME}/bin"
 WORKDIR ${HOME}/bin
 
 RUN echo "${HOME}"
-RUN sudo chown -R "${HOME}/bin"
+RUN sudo chown -R ciuser "${HOME}"
 
 RUN curl -L https://github.com/1Password/typeshare/releases/download/v1.7.0/typeshare-cli-v1.7.0-x86_64-unknown-linux-gnu.tar.xz | tar -xJ -C ./
 
