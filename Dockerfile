@@ -20,7 +20,7 @@ RUN mkdir -p "${HOME}/.npm" \
     && npm config set prefix "${HOME}/.npm"
 
 # Install pnpm if not already installed
-RUN command -v pnpm || npm install -g pnpm
+RUN npm install -g pnpm
 
 # Install Rust using rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
