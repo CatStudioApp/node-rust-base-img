@@ -13,16 +13,25 @@ RUN groupadd --gid 3434 ciuser \
     && echo 'ciuser ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/50-ciuser \
     && echo 'Defaults    env_keep += "DEBIAN_FRONTEND"' > /etc/sudoers.d/env_keep
 
+ENV PATH="${HOME}/.npm/bin:${PATH}"
+
+# Set SHELL directive to use bash for subsequent commands
+SHELL ["/bin/bash", "-c"]
+
+ENV SHELL bash
+
 USER ciuser
 
-# Set npm configuration for the user
+# Set npm configuration for the user and update PATH
 RUN mkdir -p "${HOME}/.npm" \
     && npm config set prefix "${HOME}/.npm"
 
-ENV PATH="${PATH}:${HOME}/.npm/bin"  
+# Update PATH to include the .npm/bin directory
 
-# Install pnpm if not already installed
-RUN npm install -g pnpm
+RUN export PATH="${HOME}/.npm/bin:${PATH}"
+
+# https://pnpm.io/docker#example-2-build-multiple-docker-images-in-a-monorepo
+RUN sudo corepack enable
 
 RUN pnpm -v
 
