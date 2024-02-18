@@ -1,9 +1,8 @@
 FROM node:20-bullseye
 
 # Install sudo, curl, and build-essential since it's not included in slim images by default
-RUN apt-get update && apt-get install -y sudo curl build-essential default-jre apt-utils \
+RUN apt-get update && apt-get install -y sudo curl build-essential openjdk-17-jre-headless apt-utils \
     && rm -rf /var/lib/apt/lists/*
-
 
 # Check if the sudoers.d directory exists; if not, create it
 RUN if [ ! -d /etc/sudoers.d ]; then mkdir /etc/sudoers.d; fi
@@ -39,9 +38,12 @@ RUN pnpm setup
 
 RUN npm install @openapitools/openapi-generator-cli -g
 RUN which openapi-generator-cli
-RUN openapi-generator-cli version > /dev/stdout 2>&1
-# RUN /bin/bash -c "set -x && npx openapi-generator-cli version"
 
+# RUN npx @openapitools/openapi-generator-cli version
+
+RUN which openapi-generator-cli
+# Use the full path if available or try directly if `which` command succeeds
+RUN sudo openapi-generator-cli version
 
 # Install Rust using rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
