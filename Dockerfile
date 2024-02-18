@@ -13,6 +13,7 @@ RUN groupadd --gid 3434 ciuser \
     && echo 'ciuser ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/50-ciuser \
     && echo 'Defaults    env_keep += "DEBIAN_FRONTEND"' > /etc/sudoers.d/env_keep
 
+ENV HOME /home/ciuser
 ENV PATH="${HOME}/.npm/bin:${PATH}"
 RUN export PATH="${HOME}/.npm/bin:${PATH}"
 
@@ -30,21 +31,19 @@ USER ciuser
 RUN mkdir -p "${HOME}/.npm" \
     && npm config set prefix "${HOME}/.npm"
 
-# Update PATH to include the .npm/bin directory
-
-
-
 # https://pnpm.io/docker#example-2-build-multiple-docker-images-in-a-monorepo
 RUN sudo corepack enable
 
-RUN pnpm -v
+RUN pnpm setup
+
+
+RUN pnpm install @openapitools/openapi-generator-cli -g
+RUN openapi-generator-cli -h
+
 
 # Install Rust using rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-RUN pnpm install @openapitools/openapi-generator-cli -g
-RUN pushd -h
-RUN openapi-generator-cli -h
 # Install typeshare-cli using Cargo
 RUN /home/ciuser/.cargo/bin/cargo install typeshare-cli
 
