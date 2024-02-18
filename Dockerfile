@@ -1,7 +1,7 @@
 FROM node:20-slim
 
-# Install sudo since it's not included in slim images by default
-RUN apt-get update && apt-get install -y sudo curl \
+# Install sudo, curl, and build-essential since it's not included in slim images by default
+RUN apt-get update && apt-get install -y sudo curl build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 # Check if the sudoers.d directory exists; if not, create it
