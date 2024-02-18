@@ -43,7 +43,7 @@ RUN which openapi-generator-cli
 
 RUN which openapi-generator-cli
 # it's strange with sudo but otherwise it would exit with 1 and no explanation
-RUN sudo openapi-generator-cli version
+RUN sudo /home/ciuser/.npm/bin/openapi-generator-cli version
 
 # Install Rust using rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
