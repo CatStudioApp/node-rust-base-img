@@ -19,6 +19,8 @@ USER ciuser
 RUN mkdir -p "${HOME}/.npm" \
     && npm config set prefix "${HOME}/.npm"
 
+ENV PATH="${PATH}:${HOME}/.npm/bin"  
+
 # Install pnpm if not already installed
 RUN npm install -g pnpm
 
