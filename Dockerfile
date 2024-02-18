@@ -30,6 +30,9 @@ RUN mkdir -p "${HOME}/.npm" \
 
 RUN export PATH="${HOME}/.npm/bin:${PATH}"
 
+ENV PNPM_HOME="${HOME}/.pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
 # https://pnpm.io/docker#example-2-build-multiple-docker-images-in-a-monorepo
 RUN sudo corepack enable
 
