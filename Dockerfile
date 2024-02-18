@@ -42,7 +42,7 @@ RUN which openapi-generator-cli
 # RUN npx @openapitools/openapi-generator-cli version
 
 RUN which openapi-generator-cli
-# Use the full path if available or try directly if `which` command succeeds
+# it's strange with sudo but otherwise it would exit with 1 and no explanation
 RUN sudo openapi-generator-cli version
 
 # Install Rust using rustup
