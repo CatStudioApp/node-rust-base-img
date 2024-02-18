@@ -37,7 +37,7 @@ RUN sudo corepack enable
 
 RUN pnpm setup
 
-RUN pnpm install @openapitools/openapi-generator-cli -g
+RUN npm install @openapitools/openapi-generator-cli -g
 RUN openapi-generator-cli -h
 
 # Install Rust using rustup
