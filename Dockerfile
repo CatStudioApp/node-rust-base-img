@@ -1,4 +1,4 @@
-FROM node:20-slim
+FROM node:20-bullseye
 
 # Install sudo, curl, and build-essential since it's not included in slim images by default
 RUN apt-get update && apt-get install -y sudo curl build-essential default-jre apt-utils \
