@@ -1,7 +1,7 @@
 FROM node:20-slim
 
 # Install sudo, curl, and build-essential since it's not included in slim images by default
-RUN apt-get update && apt-get install -y sudo curl build-essential openjdk-17-jre \
+RUN apt-get update && apt-get install -y sudo curl build-essential openjdk-17-jre-headless \
     && rm -rf /var/lib/apt/lists/*
 
 
