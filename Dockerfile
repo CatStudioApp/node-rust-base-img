@@ -1,7 +1,7 @@
 FROM node:20-slim
 
 # Install sudo, curl, and build-essential since it's not included in slim images by default
-RUN apt-get update && apt-get install -y sudo curl build-essential openjdk-17-jre-headless \
+RUN apt-get update && apt-get install -y sudo curl build-essential default-jre apt-utils \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -38,7 +38,10 @@ RUN sudo corepack enable
 RUN pnpm setup
 
 RUN npm install @openapitools/openapi-generator-cli -g
-RUN openapi-generator-cli -h
+RUN which openapi-generator-cli
+RUN openapi-generator-cli version > /dev/stdout 2>&1
+# RUN /bin/bash -c "set -x && npx openapi-generator-cli version"
+
 
 # Install Rust using rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
