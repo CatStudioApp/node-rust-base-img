@@ -29,11 +29,8 @@ RUN command -v pnpm || npm install -g pnpm
 RUN mkdir -p "${HOME}/bin"
 WORKDIR ${HOME}/bin
 
-# Download, unzip the typeshare-cli and move it to a directory in the PATH
-RUN curl -L https://github.com/1Password/typeshare/releases/download/v1.7.0/typeshare-cli-v1.7.0-x86_64-unknown-linux-gnu.tar.xz | tar -xJ \
-    && mkdir -p "${HOME}/bin" \
-    && mv typeshare-cli-v1.7.0-x86_64-unknown-linux-gnu/typeshare "${HOME}/bin/" \
-    && rm -r typeshare-cli-v1.7.0-x86_64-unknown-linux-gnu
+RUN curl -L https://github.com/1Password/typeshare/releases/download/v1.7.0/typeshare-cli-v1.7.0-x86_64-unknown-linux-gnu.tar.xz | tar -xJ -C ./
+
 
 # Add the bin directory to the PATH
 ENV PATH="${HOME}/bin:${PATH}"
