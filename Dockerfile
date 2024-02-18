@@ -15,12 +15,19 @@ RUN groupadd --gid 3434 ciuser \
 
 USER ciuser
 
+WORKDIR /home/ciuser
+
+
 # Set npm configuration for the user
 RUN mkdir -p "${HOME}/.npm" \
     && npm config set prefix "${HOME}/.npm"
 
 # Install pnpm if not already installed
 RUN command -v pnpm || npm install -g pnpm
+
+# Create a directory for the binary explicitly and set it as working directory
+RUN mkdir -p "${HOME}/bin"
+WORKDIR ${HOME}/bin
 
 # Download, unzip the typeshare-cli and move it to a directory in the PATH
 RUN curl -L https://github.com/1Password/typeshare/releases/download/v1.7.0/typeshare-cli-v1.7.0-x86_64-unknown-linux-gnu.tar.xz | tar -xJ \
