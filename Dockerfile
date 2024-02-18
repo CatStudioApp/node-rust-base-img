@@ -51,4 +51,3 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 # Install typeshare-cli using Cargo
 RUN /home/ciuser/.cargo/bin/cargo install typeshare-cli
 
-ENTRYPOINT [ "/bin/bash" ]
