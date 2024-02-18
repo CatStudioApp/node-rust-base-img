@@ -1,7 +1,7 @@
 FROM node:20-slim
 
 # Install sudo, curl, and build-essential since it's not included in slim images by default
-RUN apt-get update && apt-get install -y sudo curl build-essential \
+RUN apt-get update && apt-get install -y sudo curl build-essential xz-utils \
     && rm -rf /var/lib/apt/lists/*
 
 # Check if the sudoers.d directory exists; if not, create it
@@ -22,8 +22,11 @@ RUN mkdir -p "${HOME}/.npm" \
 # Install pnpm if not already installed
 RUN command -v pnpm || npm install -g pnpm
 
-# Install Rust using rustup
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+# Download, unzip the typeshare-cli and move it to a directory in the PATH
+RUN curl -L https://github.com/1Password/typeshare/releases/download/v1.7.0/typeshare-cli-v1.7.0-x86_64-unknown-linux-gnu.tar.xz | tar -xJ \
+    && mkdir -p "${HOME}/bin" \
+    && mv typeshare-cli-v1.7.0-x86_64-unknown-linux-gnu/typeshare "${HOME}/bin/" \
+    && rm -r typeshare-cli-v1.7.0-x86_64-unknown-linux-gnu
 
-# Install typeshare-cli using Cargo
-RUN /home/ciuser/.cargo/bin/cargo install typeshare-cli
+# Add the bin directory to the PATH
+ENV PATH="${HOME}/bin:${PATH}"
