@@ -1,8 +1,9 @@
 FROM node:20-slim
 
 # Install sudo, curl, and build-essential since it's not included in slim images by default
-RUN apt-get update && apt-get install -y sudo curl build-essential \
+RUN apt-get update && apt-get install -y sudo curl build-essential openjdk-17-jre \
     && rm -rf /var/lib/apt/lists/*
+
 
 # Check if the sudoers.d directory exists; if not, create it
 RUN if [ ! -d /etc/sudoers.d ]; then mkdir /etc/sudoers.d; fi
@@ -15,10 +16,10 @@ RUN groupadd --gid 3434 ciuser \
 
 ENV HOME /home/ciuser
 ENV PATH="${HOME}/.npm/bin:${PATH}"
-RUN export PATH="${HOME}/.npm/bin:${PATH}"
 
 ENV PNPM_HOME="${HOME}/.pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+RUN export PATH="${PNPM_HOME}:${HOME}/.npm/bin:${PATH}"
+ENV PATH="${PNPM_HOME}:${HOME}/.npm/bin:${PATH}"
 
 # Set SHELL directive to use bash for subsequent commands
 SHELL ["/bin/bash", "-c"]
@@ -36,10 +37,8 @@ RUN sudo corepack enable
 
 RUN pnpm setup
 
-
 RUN pnpm install @openapitools/openapi-generator-cli -g
 RUN openapi-generator-cli -h
-
 
 # Install Rust using rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
