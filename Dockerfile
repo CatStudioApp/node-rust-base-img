@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y curl build-essential default-jre-headle
     && rm -rf /var/lib/apt/lists/* \
     && locale-gen en_US.UTF-8
 
-# ENV SHELL bash
+ENV SHELL sh
 # SHELL ["/bin/bash", "-c"]
 
 
