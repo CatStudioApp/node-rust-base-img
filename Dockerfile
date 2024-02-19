@@ -16,7 +16,7 @@ RUN groupadd --gid 3434 ciuser \
 
 ENV SHELL bash
 # Set SHELL directive to use bash for subsequent commands
-SHELL ["/bin/bash", "-c"]
+SHELL ["/bin/bash", "-l", "-c"]
 
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
