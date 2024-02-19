@@ -14,6 +14,8 @@ RUN groupadd --gid 3434 ciuser \
     && echo 'ciuser ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/50-ciuser \
     && echo 'Defaults    env_keep += "DEBIAN_FRONTEND"' > /etc/sudoers.d/env_keep
 
+RUN rm -rf /bin/sh
+RUN ln -s /bin/bash /bin/sh
 
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
