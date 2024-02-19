@@ -22,7 +22,7 @@ ENV SHELL bash
 # Set SHELL directive to use bash for subsequent commands
 SHELL ["/bin/bash", "-c"]
 
-RUN echo "" > /etc/profile
+# RUN echo "" > /etc/profile
 
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
