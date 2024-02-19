@@ -46,7 +46,7 @@ RUN which openapi-generator-cli
 RUN /root/.npm/bin/openapi-generator-cli version
 
 # Install Rust using rustup
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 # RUN sed -i '1s|^#!/bin/sh|#!/bin/bash|' $HOME/.cargo/env
 # RUN rm -rf ~/.profile
