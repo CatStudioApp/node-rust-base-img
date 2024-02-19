@@ -22,6 +22,8 @@ ENV SHELL bash
 # Set SHELL directive to use bash for subsequent commands
 SHELL ["/bin/bash", "-c"]
 
+RUN echo "" > /etc/profile
+
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
@@ -56,7 +58,6 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
 
 RUN sed -i '1s|^#!/bin/sh|#!/bin/bash|' $HOME/.cargo/env
 RUN rm -rf ~/.profile
-RUN sudo echo "" > /etc/profile
 
 # Install typeshare-cli using Cargo
 RUN /home/ciuser/.cargo/bin/cargo install typeshare-cli
