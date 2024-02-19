@@ -1,4 +1,4 @@
-FROM node:20-bullseye
+FROM node:20-buster-slim
 
 RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
