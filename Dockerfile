@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y curl build-essential default-jre-headle
 # ENV SHELL bash
 # SHELL ["/bin/bash", "-c"]
 
-# RUN echo "" > /etc/profile
 
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
