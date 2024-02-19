@@ -16,7 +16,7 @@ RUN groupadd --gid 3434 ciuser \
 
 ENV SHELL bash
 # Set SHELL directive to use bash for subsequent commands
-SHELL ["/bin/bash", "-l", "-c"]
+SHELL ["/bin/bash"]
 
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
@@ -54,4 +54,4 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 RUN /home/ciuser/.cargo/bin/cargo install typeshare-cli
 
 # https://gitlab.com/gitlab-org/gitlab-runner/-/issues/2109#note_47480476
-ENTRYPOINT ["/bin/bash", "-l", "-c"]
+# ENTRYPOINT ["/bin/bash", "-l", "-c"]
