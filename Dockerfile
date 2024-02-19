@@ -1,4 +1,4 @@
-FROM node:20-buster-slim
+FROM node:lts-slim
 
 RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
@@ -56,6 +56,7 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
 
 RUN sed -i '1s|^#!/bin/sh|#!/bin/bash|' $HOME/.cargo/env
 RUN rm -rf ~/.profile
+RUN sudo echo "" > /etc/profile
 
 # Install typeshare-cli using Cargo
 RUN /home/ciuser/.cargo/bin/cargo install typeshare-cli
