@@ -1,8 +1,9 @@
 FROM node:20-bullseye
 
 # Install sudo, curl, and build-essential since it's not included in slim images by default
-RUN apt-get update && apt-get install -y sudo curl build-essential openjdk-17-jre-headless apt-utils \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y sudo curl build-essential openjdk-17-jre-headless apt-utils locales \
+    && rm -rf /var/lib/apt/lists/* \
+    && locale-gen en_US.UTF-8
 
 # Check if the sudoers.d directory exists; if not, create it
 RUN if [ ! -d /etc/sudoers.d ]; then mkdir /etc/sudoers.d; fi
@@ -12,6 +13,11 @@ RUN groupadd --gid 3434 ciuser \
     && useradd --uid 3434 --gid ciuser --shell /bin/bash --create-home ciuser \
     && echo 'ciuser ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/50-ciuser \
     && echo 'Defaults    env_keep += "DEBIAN_FRONTEND"' > /etc/sudoers.d/env_keep
+
+
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 
 ENV HOME /home/ciuser
 ENV PATH="${HOME}/.npm/bin:${PATH}"
