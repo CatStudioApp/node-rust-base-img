@@ -14,6 +14,8 @@ RUN rustup update; \
 RUN mkdir /home/circleci/store; \
     pnpm config set store-dir /home/circleci/store
 
+RUN pnpm setup
+
 RUN npm install @openapitools/openapi-generator-cli -g
 RUN openapi-generator-cli version
 
