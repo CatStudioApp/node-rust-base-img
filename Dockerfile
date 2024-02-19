@@ -51,7 +51,7 @@ RUN sudo /home/ciuser/.npm/bin/openapi-generator-cli version
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
 
 RUN sed -i '1s|^#!/bin/sh|#!/bin/bash|' $HOME/.cargo/env
-
+RUN rm -rf ~/.profile
 
 # Install typeshare-cli using Cargo
 RUN /home/ciuser/.cargo/bin/cargo install typeshare-cli
