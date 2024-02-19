@@ -39,9 +39,6 @@ RUN pnpm setup
 RUN npm install @openapitools/openapi-generator-cli -g
 RUN which openapi-generator-cli
 
-# RUN npx @openapitools/openapi-generator-cli version
-
-RUN which openapi-generator-cli
 # it's strange with sudo but otherwise it would exit with 1 and no explanation
 RUN sudo /home/ciuser/.npm/bin/openapi-generator-cli version
 
@@ -51,4 +48,4 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 # Install typeshare-cli using Cargo
 RUN /home/ciuser/.cargo/bin/cargo install typeshare-cli
 
-ENTRYPOINT [ "/bin/bash", "-c" ]
+ENTRYPOINT [ "/bin/bash" ]
