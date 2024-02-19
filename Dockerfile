@@ -14,8 +14,9 @@ RUN groupadd --gid 3434 ciuser \
     && echo 'ciuser ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/50-ciuser \
     && echo 'Defaults    env_keep += "DEBIAN_FRONTEND"' > /etc/sudoers.d/env_keep
 
-RUN rm -rf /bin/sh
-RUN ln -s /bin/bash /bin/sh
+ENV SHELL bash
+# Set SHELL directive to use bash for subsequent commands
+SHELL ["/bin/bash", "-c"]
 
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
@@ -28,10 +29,6 @@ ENV PNPM_HOME="${HOME}/.pnpm"
 RUN export PATH="${PNPM_HOME}:${HOME}/.npm/bin:${PATH}"
 ENV PATH="${PNPM_HOME}:${HOME}/.npm/bin:${PATH}"
 
-# Set SHELL directive to use bash for subsequent commands
-SHELL ["/bin/bash", "-c"]
-
-ENV SHELL bash
 
 USER ciuser
 
