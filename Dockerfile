@@ -21,4 +21,4 @@ RUN pnpm config set script-shell /bin/bash
 RUN npm install @openapitools/openapi-generator-cli -g
 RUN openapi-generator-cli version
 
-RUN cargo install typeshare-cli
+RUN cargo install typeshare-cli sccache
