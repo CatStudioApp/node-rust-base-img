@@ -12,12 +12,9 @@ RUN apt-get update && apt-get install -y curl build-essential default-jre-headle
 ENV SHELL sh
 # SHELL ["/bin/bash", "-c"]
 
-
 ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
-
-RUN echo home is ${HOME}
+# ENV LANGUAGE en_US:en
+# ENV LC_ALL en_US.UTF-8
 
 # ENV HOME /root
 ENV PATH="${HOME}/.npm/bin:${PATH}"
@@ -27,8 +24,6 @@ RUN export PATH="${PNPM_HOME}:${HOME}/.npm/bin:${PATH}"
 ENV PATH="${PNPM_HOME}:${HOME}/.npm/bin:${PATH}"
 
 
-# USER ciuser
-
 # Set npm configuration for the user and update PATH
 RUN mkdir -p "${HOME}/.npm" \
     && npm config set prefix "${HOME}/.npm"
@@ -36,11 +31,11 @@ RUN mkdir -p "${HOME}/.npm" \
 # https://pnpm.io/docker#example-2-build-multiple-docker-images-in-a-monorepo
 RUN corepack enable
 
-RUN pnpm --help
+# RUN pnpm --help
 # RUN pnpm setup
 
 RUN npm install @openapitools/openapi-generator-cli -g
-RUN which openapi-generator-cli
+# RUN which openapi-generator-cli
 
 # it's strange with sudo but otherwise it would exit with 1 and no explanation
 RUN /root/.npm/bin/openapi-generator-cli version
