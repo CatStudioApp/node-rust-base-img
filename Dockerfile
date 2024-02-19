@@ -36,7 +36,8 @@ RUN mkdir -p "${HOME}/.npm" \
 # https://pnpm.io/docker#example-2-build-multiple-docker-images-in-a-monorepo
 RUN corepack enable
 
-RUN pnpm setup
+RUN pnpm --help
+# RUN pnpm setup
 
 RUN npm install @openapitools/openapi-generator-cli -g
 RUN which openapi-generator-cli
