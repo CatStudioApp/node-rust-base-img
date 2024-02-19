@@ -54,4 +54,5 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 # Install typeshare-cli using Cargo
 RUN /home/ciuser/.cargo/bin/cargo install typeshare-cli
 
-ENTRYPOINT [ "/bin/bash" ]
+# https://gitlab.com/gitlab-org/gitlab-runner/-/issues/2109#note_47480476
+ENTRYPOINT ["/bin/bash", "-l", "-c"]
