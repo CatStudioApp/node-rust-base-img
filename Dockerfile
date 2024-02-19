@@ -43,7 +43,7 @@ RUN mkdir -p "${HOME}/.npm" \
     && npm config set prefix "${HOME}/.npm"
 
 # https://pnpm.io/docker#example-2-build-multiple-docker-images-in-a-monorepo
-RUN sudo corepack enable
+RUN corepack enable
 
 RUN pnpm setup
 
@@ -51,7 +51,7 @@ RUN npm install @openapitools/openapi-generator-cli -g
 RUN which openapi-generator-cli
 
 # it's strange with sudo but otherwise it would exit with 1 and no explanation
-RUN sudo /root/.npm/bin/openapi-generator-cli version
+RUN /root/.npm/bin/openapi-generator-cli version
 
 # Install Rust using rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
