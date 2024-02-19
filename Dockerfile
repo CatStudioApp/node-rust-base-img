@@ -1,5 +1,9 @@
 FROM node:20-bullseye
 
+RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+RUN echo "LANG=en_US.UTF-8" > /etc/locale.conf
+
 # Install sudo, curl, and build-essential since it's not included in slim images by default
 RUN apt-get update && apt-get install -y sudo curl build-essential openjdk-17-jre-headless apt-utils locales \
     && rm -rf /var/lib/apt/lists/* \
