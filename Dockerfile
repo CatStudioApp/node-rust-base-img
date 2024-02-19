@@ -56,8 +56,8 @@ RUN /root/.npm/bin/openapi-generator-cli version
 # Install Rust using rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
 
-RUN sed -i '1s|^#!/bin/sh|#!/bin/bash|' $HOME/.cargo/env
-RUN rm -rf ~/.profile
+# RUN sed -i '1s|^#!/bin/sh|#!/bin/bash|' $HOME/.cargo/env
+# RUN rm -rf ~/.profile
 
 # Install typeshare-cli using Cargo
 RUN /root/.cargo/bin/cargo install typeshare-cli
