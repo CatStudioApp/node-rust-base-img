@@ -1,4 +1,4 @@
-FROM cimg/rust:1.75-browsers
+FROM cimg/rust:1.77-browsers
 
 RUN rustup --version; \
     cargo --version; \
