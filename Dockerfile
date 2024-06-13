@@ -18,6 +18,7 @@ RUN mkdir /home/circleci/store; \
 
 RUN pnpm config set script-shell /bin/bash
 
+RUN sudo chown -R $USER /usr/local/lib/node_modules
 RUN sudo npm install @openapitools/openapi-generator-cli -g
 RUN openapi-generator-cli version
 
