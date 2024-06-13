@@ -18,7 +18,7 @@ RUN mkdir /home/circleci/store; \
 
 RUN pnpm config set script-shell /bin/bash
 
-RUN npm install @openapitools/openapi-generator-cli -g
+RUN sudo npm install @openapitools/openapi-generator-cli -g
 RUN openapi-generator-cli version
 
 RUN cargo install typeshare-cli sccache
