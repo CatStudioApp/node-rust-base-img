@@ -18,8 +18,9 @@ RUN mkdir /home/circleci/store; \
 
 RUN pnpm config set script-shell /bin/bash
 
-RUN sudo chown -R $USER /usr/local/lib/node_modules
+RUN sudo chown -R circleci /usr/local/lib/node_modules
 RUN sudo npm install @openapitools/openapi-generator-cli -g
 RUN openapi-generator-cli version
 
-RUN cargo install typeshare-cli sccache
+RUN cargo install sccache
+RUN curl --proto '=https' --tlsv1.2 -LsSf https://github.com/1Password/typeshare/releases/download/v1.9.2/typeshare-cli-v1.9.2-installer.sh | sh
