@@ -14,6 +14,10 @@ RUN rustup update; \
 RUN mkdir /home/circleci/store; \
     pnpm config set store-dir /home/circleci/store
 
+RUN echo $0
+
+ENV SHELL /bin/bash
+
 RUN pnpm setup
 
 RUN pnpm config set script-shell /bin/bash
