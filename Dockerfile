@@ -16,9 +16,10 @@ RUN mkdir /home/circleci/store; \
 
 RUN echo $0
 
-ENV SHELL /bin/bash
+ENV SHELL="/bin/bash"
 
 RUN pnpm setup
+RUN source /home/circleci/.bashrc
 
 RUN pnpm config set script-shell /bin/bash
 
